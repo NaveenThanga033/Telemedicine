@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GenMedz Blog</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+    nav { background-color: #74C0FC; padding: 10px; }
+    nav ul { list-style: none; padding: 0; display: flex; justify-content: space-around; }
+    nav ul li { display: inline; }
+    nav ul li a { color: white; text-decoration: none; }
+    h1 { text-align: center; }
+    .blog-sec { display: flex; flex-wrap: wrap; justify-content: space-around; margin: 20px; }
+    .post { width: 45%; background-color: white; padding: 20px; margin: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1); }
+    .post h2 { color: #333; }
+    .post p { line-height: 1.6; color: #666; }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="home1.html">Home</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="wishlist.html">Wishlist</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Blog Header -->
+  <h1>GenMedz Blog</h1>
+
+  <!-- Blog Posts -->
+  <section class="blog-sec" id="blogPosts"></section>
+
+  <script>
+    // Load XML and XSL files
+    function loadXMLDoc(filename) {
+      let xhttp;
+      if (window.XMLHttpRequest) {
+        xhttp = new XMLHttpRequest();
+      } else {
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      xhttp.open("GET", filename, false);
+      xhttp.send();
+      return xhttp.responseXML;
+    }
+
+    function displayResult() {
+      const xml = loadXMLDoc("blogData.xml");
+      const xsl = loadXMLDoc("blogData.xsl");
+
+      // Check browser support for XSLTProcessor
+      if (window.XSLTProcessor) {
+        const xsltProcessor = new XSLTProcessor();
+        xsltProcessor.importStylesheet(xsl);
+        const resultDocument = xsltProcessor.transformToFragment(xml, document);
+        document.getElementById("blogPosts").appendChild(resultDocument);
+      }
+    }
+
+    // Load and display the result when the page loads
+    window.onload = displayResult;
+  </script>
+</body>
+</html>

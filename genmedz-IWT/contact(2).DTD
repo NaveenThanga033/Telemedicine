@@ -1,0 +1,21 @@
+<!DOCTYPE contactPage
+<!ELEMENT contactForm (heading, form)>
+<!ELEMENT heading (#PCDATA)>
+<!ELEMENT form (field+, button)>
+<!ATTLIST form action CDATA #REQUIRED>
+<!ELEMENT field (label, input | textarea)>
+<!ELEMENT label (#PCDATA)>
+<!ATTLIST label for IDREF #REQUIRED>
+<!ELEMENT input EMPTY>
+<!ATTLIST input type (text | email) #REQUIRED
+                 id ID #REQUIRED
+                 name CDATA #REQUIRED
+                 required (true | false) #IMPLIED>
+<!ELEMENT textarea (#PCDATA)>
+<!ATTLIST textarea id ID #REQUIRED
+                   name CDATA #REQUIRED
+                   rows CDATA #IMPLIED
+                   required (true | false) #IMPLIED>
+<!ELEMENT button (#PCDATA)>
+<!ATTLIST button type (submit | button) #IMPLIED>
+>
